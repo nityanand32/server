@@ -121,7 +121,7 @@ bool
 btr_scrub_lock_dict_func(ulint space, bool lock_to_close_table,
 			 const char * file, uint line)
 {
-	uint start = time(0);
+	uint start = (uint)time(0);
 	uint last = start;
 
 	while (mutex_enter_nowait(&(dict_sys->mutex))) {
@@ -136,7 +136,7 @@ btr_scrub_lock_dict_func(ulint space, bool lock_to_close_table,
 		}
 		os_thread_sleep(250000);
 
-		uint now = time(0);
+		uint now = (uint)time(0);
 		if (now >= last + 30) {
 			fprintf(stderr,
 				"WARNING: %s:%u waited %u seconds for"

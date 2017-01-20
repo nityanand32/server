@@ -1576,7 +1576,7 @@ ulint
 fil_space_get_block_size(
 /*=====================*/
 	ulint	id,	/*!< in: space id */
-	ulint   offset, /*!< in: page offset */
+	os_offset_t   offset, /*!< in: page offset */
 	ulint   len);	/*!< in: page len */
 
 /*******************************************************************//**

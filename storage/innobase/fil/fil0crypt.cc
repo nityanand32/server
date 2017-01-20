@@ -1763,7 +1763,7 @@ fil_crypt_get_page_throttle_func(
 	}
 
 	state->cnt_waited++;
-	state->sum_waited_us += (end - start);
+	state->sum_waited_us += (uint)(end - start);
 
 	/* average page load */
 	ulint add_sleeptime_ms = 0;
@@ -2069,7 +2069,7 @@ fil_crypt_flush_space(
 
 		if (sum_pages && end > start) {
 			state->cnt_waited += sum_pages;
-			state->sum_waited_us += (end - start);
+			state->sum_waited_us += (uint)(end - start);
 
 			/* statistics */
 			state->crypt_stat.pages_flushed += sum_pages;
@@ -2457,7 +2457,7 @@ fil_space_crypt_close_tablespace(
 		return;
 	}
 
-	uint start = time(0);
+	uint start = (uint)time(0);
 	uint last = start;
 
 	mutex_enter(&crypt_data->mutex);
@@ -2480,7 +2480,7 @@ fil_space_crypt_close_tablespace(
 		cnt = crypt_data->rotate_state.active_threads;
 		flushing = crypt_data->rotate_state.flushing;
 
-		uint now = time(0);
+		uint now = (uint)time(0);
 
 		if (now >= last + 30) {
 			ib::warn() << "Waited "

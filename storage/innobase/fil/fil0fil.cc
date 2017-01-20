@@ -714,7 +714,7 @@ retry:
 							   extent_size);
 			}
 
-			node->size = size_bytes / psize;
+			node->size = (ulint)(size_bytes / psize);
 			space->size += node->size;
 		}
 	}
@@ -6864,7 +6864,7 @@ fil_node_t*
 fil_space_get_node(
 	fil_space_t*	space,		/*!< in: file spage */
 	ulint 		space_id,	/*!< in: space id   */
-	ulint* 		block_offset,	/*!< in/out: offset in number of blocks */
+	os_offset_t* 		block_offset,	/*!< in/out: offset in number of blocks */
 	ulint 		byte_offset,	/*!< in: remainder of offset in bytes; in
 					aio this must be divisible by the OS block
 					size */
@@ -6906,7 +6906,7 @@ ulint
 fil_space_get_block_size(
 /*=====================*/
 	ulint	space_id,
-	ulint	block_offset,
+	os_offset_t	block_offset,
 	ulint	len)
 {
 	ulint block_size = 512;

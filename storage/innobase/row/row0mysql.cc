@@ -3435,7 +3435,7 @@ void
 fil_wait_crypt_bg_threads(
 	dict_table_t* table)
 {
-	uint start = time(0);
+	uint start = (uint)time(0);
 	uint last = start;
 	if (table->space != 0) {
 		fil_space_crypt_mark_space_closing(table->space, table->crypt_data);
@@ -3445,7 +3445,7 @@ fil_wait_crypt_bg_threads(
 		dict_mutex_exit_for_mysql();
 		os_thread_sleep(20000);
 		dict_mutex_enter_for_mysql();
-		uint now = time(0);
+		uint now = (uint)time(0);
 		if (now >= last + 30) {
 			ib::warn()
 				<< "Waited " << now - start

@@ -7254,7 +7254,7 @@ innobase_enlarge_columns_try(
 				    == IS_EQUAL_PACK_LENGTH
 				    && innobase_enlarge_column_try(
 					    user_table, trx, table_name,
-					    idx, cf->length, is_v)) {
+					    idx, (ulint)cf->length, is_v)) {
 					return(true);
 				}
 

@@ -11956,7 +11956,7 @@ err_col:
 			err = row_create_table_for_mysql(
 				table, m_trx, false,
 				(fil_encryption_t)options->encryption,
-				options->encryption_key_id);
+				(ulint)options->encryption_key_id);
 
 		}
 
@@ -12910,7 +12910,7 @@ index_bad:
 			m_use_data_dir,
 			options->page_compressed,
 		    	options->page_compression_level == 0 ?
-		        	default_compression_level : options->page_compression_level,
+			default_compression_level : (ulint)options->page_compression_level,
 		    	0);
 
 	/* Set the flags2 when create table or alter tables */

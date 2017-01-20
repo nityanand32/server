@@ -2007,7 +2007,7 @@ dict_foreign_def_get(
 	char* fk_def = (char *)mem_heap_alloc(foreign->heap, 4*1024);
 	const char* tbname;
 	char tablebuf[MAX_TABLE_NAME_LEN + 1] = "";
-	int i;
+	uint i;
 	char* bufend;
 
 	tbname = dict_remove_db_name(foreign->id);
@@ -2018,14 +2018,14 @@ dict_foreign_def_get(
 	sprintf(fk_def,
 		(char *)"CONSTRAINT %s FOREIGN KEY (", (char *)tablebuf);
 
-	for(i = 0; i < foreign->n_fields; i++) {
+	for(i = 0; i < (uint)foreign->n_fields; i++) {
 		char	buf[MAX_TABLE_NAME_LEN + 1] = "";
 		innobase_convert_name(buf, MAX_TABLE_NAME_LEN,
 				foreign->foreign_col_names[i],
 				strlen(foreign->foreign_col_names[i]),
 				trx->mysql_thd);
 		strcat(fk_def, buf);
-		if (i < foreign->n_fields-1) {
+		if (i < (uint)foreign->n_fields-1) {
 			strcat(fk_def, (char *)",");
 		}
 	}
@@ -2041,7 +2041,7 @@ dict_foreign_def_get(
 	strcat(fk_def, tablebuf);
 	strcat(fk_def, " (");
 
-	for(i = 0; i < foreign->n_fields; i++) {
+	for(i = 0; i < (uint)foreign->n_fields; i++) {
 		char	buf[MAX_TABLE_NAME_LEN + 1] = "";
 		bufend = innobase_convert_name(buf, MAX_TABLE_NAME_LEN,
 				foreign->referenced_col_names[i],
@@ -2049,7 +2049,7 @@ dict_foreign_def_get(
 				trx->mysql_thd);
 		buf[bufend - buf] = '\0';
 		strcat(fk_def, buf);
-		if (i < foreign->n_fields-1) {
+		if (i < (uint)foreign->n_fields-1) {
 			strcat(fk_def, (char *)",");
 		}
 	}

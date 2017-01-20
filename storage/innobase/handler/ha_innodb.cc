@@ -5508,10 +5508,7 @@ innobase_kill_query(
 			trx_mutex_taken = true;
 		}
 
-#ifdef UNIV_DEBUG
-		dberr_t err =
-#endif
-		lock_trx_handle_wait(trx, true, true);
+		dberr_t err = lock_trx_handle_wait(trx, true, true);
 
 		ut_ad(err == DB_SUCCESS || err == DB_LOCK_WAIT
 		      || err == DB_DEADLOCK);
